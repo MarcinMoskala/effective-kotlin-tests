@@ -1,4 +1,4 @@
-package org.jetbrains
+package org.kotlinacademy
 
 import org.openjdk.jmh.annotations.*
 import java.util.concurrent.*

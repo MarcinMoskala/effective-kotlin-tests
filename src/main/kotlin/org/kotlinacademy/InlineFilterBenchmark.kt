@@ -1,4 +1,4 @@
-package org.jetbrains
+package org.kotlinacademy
 
 import org.openjdk.jmh.annotations.*
 import java.util.concurrent.*
@@ -21,20 +21,20 @@ fun <T> Iterable<T>.noinlineSumByDouble(selector: (T) -> Double): Double {
 
 data class Product(val price: Double, val bought: Boolean)
 
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
-@State(Scope.Thread)
-open class InlineFilterBenchmark {
-
-    val products = (1..50_000_000).map { Product(10.0, true) }
-
-    @Benchmark
-    fun filterInline() {
-        products.filter { it.bought }.sumByDouble { it.price }
-    }
-
-    @Benchmark
-    fun filterNoninline() {
-        products.noinlineFilter { it.bought }.noinlineSumByDouble { it.price }
-    }
-}
+//@BenchmarkMode(Mode.AverageTime)
+//@OutputTimeUnit(TimeUnit.NANOSECONDS)
+//@State(Scope.Thread)
+//open class InlineFilterBenchmark {
+//
+//    val products = (1..50_000_000).map { Product(10.0, true) }
+//
+//    @Benchmark
+//    fun filterInline() {
+//        products.filter { it.bought }.sumByDouble { it.price }
+//    }
+//
+//    @Benchmark
+//    fun filterNoninline() {
+//        products.noinlineFilter { it.bought }.noinlineSumByDouble { it.price }
+//    }
+//}
