@@ -24,7 +24,7 @@ public class PrimitivesJavaBenchmark {
     public Integer objectCount1_000_000() {
         Integer a = 1;
         for (Integer i = 0; i < 1_000_000; i++) {
-            Integer b = *1;
+            Integer b = 1;
             a = a + b * 2;
         }
         return a;
