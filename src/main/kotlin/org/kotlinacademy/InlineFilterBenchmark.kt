@@ -19,6 +19,20 @@ fun <T> Iterable<T>.noinlineSumByDouble(selector: (T) -> Double): Double {
     return sum
 }
 
+inline fun <T> Iterable<T>.filterInline(predicate: (T) -> Boolean): List<T> {
+    val destination = ArrayList<T>()
+    for (element in this) if (predicate(element)) destination.add(element)
+    return destination
+}
+
+inline fun <T> Iterable<T>.sumByDoubleInline(selector: (T) -> Double): Double {
+    var sum = 0.0
+    for (element in this) {
+        sum += selector(element)
+    }
+    return sum
+}
+
 data class Product(val price: Double, val bought: Boolean)
 
 @BenchmarkMode(Mode.AverageTime)
@@ -30,16 +44,16 @@ open class InlineFilterBenchmark {
 
     @Setup
     fun init() {
-        products = (1..50_000_000).map { Product(10.0, true) }
+        products = (1..5_000).map { Product(10.0, true) }
     }
 
     @Benchmark
     fun filterInline() {
-        products.filter { it.bought }.sumByDouble { it.price }
+        products.filterInline { it.bought }.sumByDoubleInline { it.price }
     }
 
     @Benchmark
-    fun filterNoninline() {
+    fun filterANoninline() {
         products.noinlineFilter { it.bought }.noinlineSumByDouble { it.price }
     }
 }

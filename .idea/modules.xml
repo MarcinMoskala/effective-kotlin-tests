@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kotlin-benchmarks.iml" filepath="$PROJECT_DIR$/kotlin-benchmarks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/benchmarks.iml" filepath="$PROJECT_DIR$/benchmarks.iml" />
     </modules>
   </component>
 </project>

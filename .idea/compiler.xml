@@ -12,6 +12,7 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <bytecodeTargetLevel>
+      <module name="benchmarks" target="1.8" />
       <module name="kotlin-benchmarks" target="1.8" />
     </bytecodeTargetLevel>
   </component>
