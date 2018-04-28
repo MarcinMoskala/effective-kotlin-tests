@@ -53,7 +53,7 @@ open class InlineFilterBenchmark {
     }
 
     @Benchmark
-    fun filterANoninline() {
+    fun filterNoninline() {
         products.noinlineFilter { it.bought }.noinlineSumByDouble { it.price }
     }
 }
