@@ -33,8 +33,6 @@ inline fun <T> Iterable<T>.sumByDoubleInline(selector: (T) -> Double): Double {
     return sum
 }
 
-data class Product(val price: Double, val bought: Boolean)
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)

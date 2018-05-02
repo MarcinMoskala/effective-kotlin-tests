@@ -29,3 +29,8 @@ PrimitivesJavaBenchmark.objectCount10000         avgt  200      46685.510 ±    
 PrimitivesJavaBenchmark.objectCount1_000_000     avgt  200    4762432.028 ±   4294.221  ns/op
 PrimitivesJavaBenchmark.primitiveCount10_000     avgt  200          2.146 ±      0.008  ns/op
 PrimitivesJavaBenchmark.primitiveCount1_000_000  avgt  200          2.127 ±      0.012  ns/op
+
+InlineRepeatBenchmark.productsListProcessing                  avgt  200  740967.426 ± 13010.105  ns/op
+InlineRepeatBenchmark.productsSequenceProcessing              avgt  200  575485.238 ± 12771.981  ns/op
+InlineRepeatBenchmark.simpleListProcessing                    avgt  200   15346.703 ±   105.663  ns/op
+InlineRepeatBenchmark.simpleSequenceProcessing                avgt  200    3519.853 ±    29.676  ns/op
