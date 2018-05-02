@@ -9,16 +9,18 @@ import java.util.concurrent.TimeUnit
 @State(Scope.Thread)
 open class SequancesBenchmark {
 
-    lateinit var productsList: List<Client>
+    lateinit var clientsList: List<Client>
+    lateinit var productsList: List<Product>
 
     @Setup
     fun init() {
-        productsList = List(1000) {
+        clientsList = List(1000) {
             Client(
                     adult = it % 10 != 1,
-                    products = (1..50).map { Product(1.0 * it / 100, true) }
+                    products = List(50) { Product(1.0 * it / 100, true) }
             )
         }
+        productsList = List(5000) { Product(1.0 * it / 100, true) }
     }
 
     @Benchmark
@@ -40,7 +42,7 @@ open class SequancesBenchmark {
 
     @Benchmark
     fun productsListProcessing(): Double {
-        return productsList
+        return clientsList
                 .filter { it.adult }
                 .flatMap { it.products }
                 .filter { it.bought }
@@ -50,9 +52,52 @@ open class SequancesBenchmark {
 
     @Benchmark
     fun productsSequenceProcessing(): Double {
-        return productsList.asSequence()
+        return clientsList.asSequence()
                 .filter { it.adult }
                 .flatMap { it.products.asSequence() }
+                .filter { it.bought }
+                .map { it.price }
+                .average()
+    }
+
+    @Benchmark
+    fun singleStepSequenceProcessing(): List<Product> {
+        return productsList.asSequence()
+                .filter { it.bought }
+                .toList()
+    }
+
+    @Benchmark
+    fun singleStepListProcessing(): List<Product> {
+        return productsList.filter { it.bought }
+    }
+
+    @Benchmark
+    fun twoStepSequenceProcessing(): List<Double> {
+        return productsList.asSequence()
+                .filter { it.bought }
+                .map { it.price }
+                .toList()
+    }
+
+    @Benchmark
+    fun twoStepListProcessing(): List<Double> {
+        return productsList
+                .filter { it.bought }
+                .map { it.price }
+    }
+
+    @Benchmark
+    fun threeStepSequenceProcessing(): Double {
+        return productsList.asSequence()
+                .filter { it.bought }
+                .map { it.price }
+                .average()
+    }
+
+    @Benchmark
+    fun threeStepListProcessing(): Double {
+        return productsList
                 .filter { it.bought }
                 .map { it.price }
                 .average()
