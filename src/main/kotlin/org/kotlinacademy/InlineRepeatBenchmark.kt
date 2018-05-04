@@ -24,17 +24,17 @@ open class InlineRepeatBenchmark {
 
     @Benchmark
     fun repeatInline() {
-        var a = 0
+        var a = 2L
         inlineRepeat(100_000_000) {
-            a += 1
+            a += a / 2
         }
     }
 
     @Benchmark
     fun repeatNoninline() {
-        var a = 0
+        var a = 2L
         noinlineRepeat(100_000_000) {
-            a += 1
+            a += a / 2
         }
     }
 }
